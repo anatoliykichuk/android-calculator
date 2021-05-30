@@ -7,20 +7,20 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/fullNameHeaderGroup"
+        android:id="@+id/companyNameGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/fullNameHeader"
+            android:id="@+id/companyNameHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/full_name" />
+            android:text="@string/name" />
 
         <EditText
-            android:id="@+id/fullNameValue"
+            android:id="@+id/companyNameValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="10" />
@@ -34,11 +34,12 @@
         android:orientation="vertical">
 
         <ToggleButton
-            android:id="@+id/sex"
+            android:id="@+id/companysType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textOn="Мужской"
-            android:textOff="Женский"/>
+            android:textOn="Поставщик"
+            android:textOff="Покупатель"
+            android:layout_weight="1" />
 
         <Switch
             android:id="@+id/isResident"
@@ -58,7 +59,7 @@
 
     <Button
         android:id="@+id/writeDossier"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Записать" />
 

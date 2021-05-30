@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Lesson 1</string>
-    <string name="full_name">ФИО:</string>
+    <string name="name">Наименование:</string>
 </resources>
