@@ -1,4 +1,4 @@
-package ru.geekbrains.lesson1;
+package ru.geekbrains.calculator;
 
 import org.junit.Test;
 

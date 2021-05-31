@@ -1,4 +1,4 @@
-package ru.geekbrains.lesson1;
+package ru.geekbrains.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
