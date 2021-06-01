@@ -9,4 +9,11 @@
     <string name="number_7">7</string>
     <string name="number_8">8</string>
     <string name="number_9">9</string>
+    <string name="number_0">0</string>
+    <string name="decimal_separator">,</string>
+    <string name="operator_minus">-</string>
+    <string name="operator_plus">+</string>
+    <string name="operator_multiply">x</string>
+    <string name="operator_divide">/</string>
+    <string name="operator_equal">=</string>
 </resources>
