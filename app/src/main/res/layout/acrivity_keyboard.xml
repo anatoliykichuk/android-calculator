@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/keyboard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="4"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/operator_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_drop"
+                android:textSize="@dimen/number_text_size" />
+
+            <Button
+                android:id="@+id/operator_change_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_change_sign"
+                android:textSize="@dimen/number_text_size" />
+
+            <Button
+                android:id="@+id/operator_divide_modulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_divide_modulo"
+                android:textSize="@dimen/number_text_size" />
+
+            <Button
+                android:id="@+id/operator_divide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_divide"
+                android:textSize="@dimen/number_text_size"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/number_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_1"
+                android:textSize="@dimen/number_text_size" />
+
+            <Button
+                android:id="@+id/number_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_2"
+                android:textSize="@dimen/number_text_size" />
+
+            <Button
+                android:id="@+id/number_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_3"
+                android:textSize="@dimen/number_text_size" />
+
+            <Button
+                android:id="@+id/operator_multiply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_multiply"
+                android:textSize="@dimen/number_text_size"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/number_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_4"
+                android:textSize="@dimen/number_text_size"/>
+
+            <Button
+                android:id="@+id/number_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_5"
+                android:textSize="@dimen/number_text_size"/>
+
+            <Button
+                android:id="@+id/number_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_6"
+                android:textSize="@dimen/number_text_size"/>
+
+            <Button
+                android:id="@+id/operator_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_minus"
+                android:textSize="@dimen/number_text_size" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/number_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_7"
+                android:textSize="@dimen/number_text_size"/>
+
+            <Button
+                android:id="@+id/number_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_8"
+                android:textSize="@dimen/number_text_size"/>
+
+            <Button
+                android:id="@+id/number_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_9"
+                android:textSize="@dimen/number_text_size"/>
+
+            <Button
+                android:id="@+id/operator_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_plus"
+                android:textSize="@dimen/number_text_size"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/number_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/number_0"
+                android:textSize="@dimen/number_text_size"
+                android:layout_span="2"/>
+
+            <Button
+                android:id="@+id/decimal_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/decimal_separator"
+                android:textSize="@dimen/number_text_size"/>
+
+            <Button
+                android:id="@+id/operator_equal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/button_indent"
+                android:text="@string/operator_equal"
+                android:textSize="@dimen/number_text_size"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+</FrameLayout>
