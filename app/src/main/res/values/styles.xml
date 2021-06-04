@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ButtonNumberStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="ButtonOperatorStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/button_operator</item>
+    </style>
+</resources>
