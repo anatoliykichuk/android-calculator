@@ -18,10 +18,9 @@
             android:gravity="center">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="123"
-                android:layout_span="4"/>
+                android:id="@+id/scoreboard"
+                android:layout_span="4"
+                style="@style/ScoreboardStyle"/>
 
         </TableRow>
 
@@ -33,17 +32,17 @@
             <Button
                 android:id="@+id/operator_drop"
                 android:text="@string/operator_drop"
-                style="@style/ButtonNumberStyle"/>
+                style="@style/ButtonSpecialOperatorStyle"/>
 
             <Button
                 android:id="@+id/operator_change_sign"
                 android:text="@string/operator_change_sign"
-                style="@style/ButtonNumberStyle"/>
+                style="@style/ButtonSpecialOperatorStyle"/>
 
             <Button
                 android:id="@+id/operator_divide_modulo"
                 android:text="@string/operator_divide_modulo"
-                style="@style/ButtonNumberStyle"/>
+                style="@style/ButtonSpecialOperatorStyle"/>
 
             <Button
                 android:id="@+id/operator_divide"
