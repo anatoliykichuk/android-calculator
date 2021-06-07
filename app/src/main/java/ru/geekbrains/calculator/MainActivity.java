@@ -4,15 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.google.android.material.button.MaterialButton;
-
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
+    private Calculator calculator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,28 +17,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setOnClickListeners() {
-        ArrayList<View> buttons = ((FrameLayout) findViewById(R.id.keyboard)).getTouchables();
+        calculator = new Calculator();
 
-        for (View button:buttons) {
-            button.setOnClickListener(this);
+        View.OnClickListener operandOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculator.operandOnClick(v.getId());
+            }
+        };
+
+        View.OnClickListener arithmeticalOperatorOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculator.arithmeticalOperatorOnClick(v.getId());
+            }
+        };
+
+        int[] operandsId = getOperandId();
+
+        for (int index = 0; index < operandsId.length; index++) {
+            findViewById(operandsId[index]).setOnClickListener(operandOnClickListener);
+        }
+
+        int[] arithmeticalOperatorsId = getArithmeticalOperatorsId();
+
+        for (int index = 0; index < arithmeticalOperatorsId.length; index++) {
+            findViewById(arithmeticalOperatorsId[index]).setOnClickListener(arithmeticalOperatorOnClickListener);
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        CharSequence buttonText = ((MaterialButton) v).getText();
-
-        TextView scoreBoard = findViewById(R.id.scoreboard);
-        scoreBoard.append(buttonText);
-
-
+    private int[] getOperandId() {
+        return new int [] {
+                R.id.number_0,
+                R.id.number_1,
+                R.id.number_2,
+                R.id.number_3,
+                R.id.number_4,
+                R.id.number_5,
+                R.id.number_6,
+                R.id.number_7,
+                R.id.number_8,
+                R.id.number_9
+        };
     }
 
-    private boolean isNumber(CharSequence buttonText) {
-
-        return false;
+    private int[] getArithmeticalOperatorsId() {
+        return new int [] {
+                R.id.operator_divide,
+                R.id.operator_divide_modulo,
+                R.id.operator_multiply,
+                R.id.operator_minus,
+                R.id.operator_plus
+        };
     }
-
-
-
 }
