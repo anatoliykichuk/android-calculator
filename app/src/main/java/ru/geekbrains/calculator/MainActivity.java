@@ -57,17 +57,19 @@ public class MainActivity extends AppCompatActivity {
                 R.id.number_6,
                 R.id.number_7,
                 R.id.number_8,
-                R.id.number_9
+                R.id.number_9,
+                R.id.decimal_separator,
         };
     }
 
     private int[] getArithmeticalOperatorsId() {
         return new int [] {
                 R.id.operator_divide,
-                R.id.operator_divide_modulo,
                 R.id.operator_multiply,
                 R.id.operator_minus,
-                R.id.operator_plus
+                R.id.operator_plus,
+                R.id.operator_percent,
+                R.id.operator_equal
         };
     }
 }

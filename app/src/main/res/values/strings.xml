@@ -17,6 +17,6 @@
     <string name="operator_divide">÷</string>
     <string name="operator_equal">=</string>
     <string name="operator_drop">C</string>
-    <string name="operator_divide_modulo">%</string>
+    <string name="operator_percent">%</string>
     <string name="operator_change_sign">±</string>
 </resources>
