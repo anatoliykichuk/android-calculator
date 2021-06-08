@@ -7,7 +7,7 @@ public class Calculator {
     private double firsOperand;
     private double secondOperand;
     private double result;
-    private String operator;
+    private int operator;
     private String lastAction;
 
     StringBuilder operand;
@@ -19,7 +19,7 @@ public class Calculator {
         this.firsOperand = Double.MIN_VALUE;
         this.secondOperand = Double.MIN_VALUE;
         this.result = Double.MIN_VALUE;
-        this.operator = "";
+        this.operator = Integer.MIN_VALUE;
         this.lastAction = "";
 
         this.operand = new StringBuilder();
@@ -41,16 +41,11 @@ public class Calculator {
         operand.append(number);
         expression.append(number);
 
-        if (operator.isEmpty()) {
+        if (operator == Integer.MIN_VALUE) {
             firsOperand = Double.parseDouble(operand.toString());
         } else {
             secondOperand = Double.parseDouble(operand.toString());
         }
-
-//        if (expression.length() > 0) {
-//            //expression.append(System.lineSeparator());
-//        }
-//        expression.append(operand.toString());
     }
 
     public void arithmeticalOperatorOnClick(int id) {
@@ -58,13 +53,67 @@ public class Calculator {
             return;
         }
 
-        operator = arithmeticalOperatorsId.get(id);
+        if (secondOperand == Double.MIN_VALUE) {
 
-        expression.append(System.lineSeparator());
-        expression.append(operator);
-        expression.append(System.lineSeparator());
+            expression.append(System.lineSeparator());
+            expression.append(arithmeticalOperatorsId.get(id));
+            expression.append(System.lineSeparator());
 
-        operand.setLength(0);
+            operand.setLength(0);
+
+        } else if (id == R.id.operator_equal) {
+
+            if (operator == R.id.operator_divide) {
+                result = firsOperand / secondOperand;
+
+            } else if (operator == R.id.operator_multiply) {
+                result = firsOperand * secondOperand;
+
+            } else if (operator == R.id.operator_minus) {
+                result = firsOperand - secondOperand;
+
+            } else if (operator == R.id.operator_plus) {
+                result = firsOperand + secondOperand;
+
+            } else if (operator == R.id.operator_percent) {
+                result = firsOperand + secondOperand;
+
+            }
+
+            expression.append(System.lineSeparator());
+            expression.append(arithmeticalOperatorsId.get(id));
+            expression.append(System.lineSeparator());
+            expression.append(result);
+
+
+        } else {
+
+            if (operator == R.id.operator_divide) {
+                result = firsOperand / secondOperand;
+
+            } else if (operator == R.id.operator_multiply) {
+                result = firsOperand * secondOperand;
+
+            } else if (operator == R.id.operator_minus) {
+                result = firsOperand - secondOperand;
+
+            } else if (operator == R.id.operator_plus) {
+                result = firsOperand + secondOperand;
+
+            } else if (operator == R.id.operator_percent) {
+                result = firsOperand + secondOperand;
+
+            }
+
+            expression.append(System.lineSeparator());
+            expression.append(arithmeticalOperatorsId.get(id));
+            expression.append(System.lineSeparator());
+            expression.append(result);
+
+        }
+
+        operator = id;
+
     }
 
     public String getExpression() {
@@ -75,7 +124,7 @@ public class Calculator {
         this.firsOperand = Double.MIN_VALUE;
         this.secondOperand = Double.MIN_VALUE;
         this.result = Double.MIN_VALUE;
-        this.operator = "";
+        this.operator = Integer.MIN_VALUE;
         this.lastAction = "";
         this.operand.setLength(0);
         this.expression.setLength(0);
