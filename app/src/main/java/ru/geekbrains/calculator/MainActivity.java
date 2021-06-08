@@ -67,20 +67,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.operator_drop).setOnClickListener(dropOperatorOnClickListener);
     }
 
-    ////
-
     private Map<Integer, String> getgetOperandId_() {
 
         Map<Integer, String> operandId = new HashMap<>();
         operandId.put(R.id.number_0, ((Button)findViewById(R.id.number_0)).getText().toString());
 
-
-
-
-
         return operandId;
     }
-
 
     private int[] getOperandId() {
         return new int [] {

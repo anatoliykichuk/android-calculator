@@ -8,10 +8,10 @@ public class Calculator {
     private double secondOperand;
     private double result;
     private int operator;
-    private String lastAction;
 
     StringBuilder operand;
     StringBuilder expression;
+
     Map<Integer, String> numbersId;
     Map<Integer, String> arithmeticalOperatorsId;
 
@@ -20,7 +20,6 @@ public class Calculator {
         this.secondOperand = Double.MIN_VALUE;
         this.result = Double.MIN_VALUE;
         this.operator = Integer.MIN_VALUE;
-        this.lastAction = "";
 
         this.operand = new StringBuilder();
         this.expression = new StringBuilder();
@@ -57,55 +56,21 @@ public class Calculator {
             return;
         }
 
-        String operatorRepresentation = arithmeticalOperatorsId.get(id);
-
         if (id != R.id.operator_equal) {
             operator = id;
             operand.setLength(0);
         }
 
-        if (result > Double.MIN_VALUE) {
-            firsOperand = result;
-            secondOperand = Double.MIN_VALUE;
-            result = Double.MIN_VALUE;
-
-            operand.setLength(0);
-
-            expression.setLength(0);
-            expression.append(String.valueOf(firsOperand));
-        }
-
-        if (firsOperand > Double.MIN_VALUE
-                && secondOperand > Double.MIN_VALUE
-                && operator > Integer.MIN_VALUE) {
-
-            if (operator == R.id.operator_divide) {
-                result = firsOperand / secondOperand;
-
-            } else if (operator == R.id.operator_multiply) {
-                result = firsOperand * secondOperand;
-
-            } else if (operator == R.id.operator_minus) {
-                result = firsOperand - secondOperand;
-
-            } else if (operator == R.id.operator_plus) {
-                result = firsOperand + secondOperand;
-
-            } else if (operator == R.id.operator_percent) {
-                //result = firsOperand + secondOperand;
-
-            }
-        }
+        shiftData();
+        calculate();
 
         expression.append(System.lineSeparator());
-        expression.append(operatorRepresentation);
+        expression.append(arithmeticalOperatorsId.get(id));
         expression.append(System.lineSeparator());
 
         if (result > Double.MIN_VALUE) {
             expression.append(String.valueOf(result));
         }
-
-
     }
 
     public String getExpression() {
@@ -117,12 +82,50 @@ public class Calculator {
         this.secondOperand = Double.MIN_VALUE;
         this.result = Double.MIN_VALUE;
         this.operator = Integer.MIN_VALUE;
-        this.lastAction = "";
         this.operand.setLength(0);
         this.expression.setLength(0);
     }
 
-    /////////////////////////////////////////////
+    private void shiftData() {
+        if (result == Double.MIN_VALUE) {
+            return;
+        }
+
+        firsOperand = result;
+        secondOperand = Double.MIN_VALUE;
+        result = Double.MIN_VALUE;
+
+        operand.setLength(0);
+
+        expression.setLength(0);
+        expression.append(String.valueOf(firsOperand));
+    }
+
+    private void calculate() {
+        if (firsOperand == Double.MIN_VALUE
+                || secondOperand == Double.MIN_VALUE
+                || operator == Integer.MIN_VALUE) {
+
+            return;
+        }
+
+        if (operator == R.id.operator_divide) {
+            result = firsOperand / secondOperand;
+
+        } else if (operator == R.id.operator_multiply) {
+            result = firsOperand * secondOperand;
+
+        } else if (operator == R.id.operator_minus) {
+            result = firsOperand - secondOperand;
+
+        } else if (operator == R.id.operator_plus) {
+            result = firsOperand + secondOperand;
+
+        } else if (operator == R.id.operator_percent) {
+            //result = firsOperand + secondOperand;
+
+        }
+    }
 
     private void initializeNumbersId() {
         this.numbersId = new HashMap<>();
