@@ -53,66 +53,58 @@ public class Calculator {
             return;
         }
 
-        if (secondOperand == Double.MIN_VALUE) {
+        if (result > Double.MIN_VALUE && id == R.id.operator_equal) {
+            return;
+        }
 
-            expression.append(System.lineSeparator());
-            expression.append(arithmeticalOperatorsId.get(id));
-            expression.append(System.lineSeparator());
+        String operatorRepresentation = arithmeticalOperatorsId.get(id);
+
+        if (id != R.id.operator_equal) {
+            operator = id;
+            operand.setLength(0);
+        }
+
+        if (result > Double.MIN_VALUE) {
+            firsOperand = result;
+            secondOperand = Double.MIN_VALUE;
+            result = Double.MIN_VALUE;
 
             operand.setLength(0);
 
-        } else if (id == R.id.operator_equal) {
-
-            if (operator == R.id.operator_divide) {
-                result = firsOperand / secondOperand;
-
-            } else if (operator == R.id.operator_multiply) {
-                result = firsOperand * secondOperand;
-
-            } else if (operator == R.id.operator_minus) {
-                result = firsOperand - secondOperand;
-
-            } else if (operator == R.id.operator_plus) {
-                result = firsOperand + secondOperand;
-
-            } else if (operator == R.id.operator_percent) {
-                result = firsOperand + secondOperand;
-
-            }
-
-            expression.append(System.lineSeparator());
-            expression.append(arithmeticalOperatorsId.get(id));
-            expression.append(System.lineSeparator());
-            expression.append(result);
-
-
-        } else {
-
-            if (operator == R.id.operator_divide) {
-                result = firsOperand / secondOperand;
-
-            } else if (operator == R.id.operator_multiply) {
-                result = firsOperand * secondOperand;
-
-            } else if (operator == R.id.operator_minus) {
-                result = firsOperand - secondOperand;
-
-            } else if (operator == R.id.operator_plus) {
-                result = firsOperand + secondOperand;
-
-            } else if (operator == R.id.operator_percent) {
-                result = firsOperand + secondOperand;
-
-            }
-
-            expression.append(System.lineSeparator());
-            expression.append(arithmeticalOperatorsId.get(id));
-            expression.append(System.lineSeparator());
-            expression.append(result);
-
+            expression.setLength(0);
+            expression.append(String.valueOf(firsOperand));
         }
 
-        operator = id;
+        if (firsOperand > Double.MIN_VALUE
+                && secondOperand > Double.MIN_VALUE
+                && operator > Integer.MIN_VALUE) {
+
+            if (operator == R.id.operator_divide) {
+                result = firsOperand / secondOperand;
+
+            } else if (operator == R.id.operator_multiply) {
+                result = firsOperand * secondOperand;
+
+            } else if (operator == R.id.operator_minus) {
+                result = firsOperand - secondOperand;
+
+            } else if (operator == R.id.operator_plus) {
+                result = firsOperand + secondOperand;
+
+            } else if (operator == R.id.operator_percent) {
+                //result = firsOperand + secondOperand;
+
+            }
+        }
+
+        expression.append(System.lineSeparator());
+        expression.append(operatorRepresentation);
+        expression.append(System.lineSeparator());
+
+        if (result > Double.MIN_VALUE) {
+            expression.append(String.valueOf(result));
+        }
+
 
     }
 
