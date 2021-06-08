@@ -19,8 +19,8 @@
 
             <TextView
                 android:id="@+id/scoreboard"
-                android:layout_span="4"
-                style="@style/ScoreboardStyle"/>
+                style="@style/ScoreboardStyle"
+                android:layout_span="4" />
 
         </TableRow>
 

@@ -6,9 +6,11 @@ import java.util.Map;
 public class Calculator {
     private double firsOperand;
     private double secondOperand;
+    private double result;
     private String operator;
     private String lastAction;
 
+    StringBuilder operand;
     StringBuilder expression;
     Map<Integer, String> numbersId;
     Map<Integer, String> arithmeticalOperatorsId;
@@ -16,29 +18,67 @@ public class Calculator {
     public Calculator() {
         this.firsOperand = Double.MIN_VALUE;
         this.secondOperand = Double.MIN_VALUE;
+        this.result = Double.MIN_VALUE;
         this.operator = "";
         this.lastAction = "";
 
-        this.expression = new StringBuilder();;
+        this.operand = new StringBuilder();
+        this.expression = new StringBuilder();
         initializeNumbersId();
         initializeArithmeticalOperatorsId();
     }
 
     public void operandOnClick(int id) {
-        if (expression.length() > 9) {
+        if (operand.length() > 9) {
             return;
         }
 
-        if (expression.length() == 0 && (id == R.id.number_0 || id == R.id.decimal_separator)) {
+        if (operand.length() == 0 && (id == R.id.number_0 || id == R.id.decimal_separator)) {
             return;
         }
 
         String number = numbersId.get(id);
+        operand.append(number);
         expression.append(number);
+
+        if (operator.isEmpty()) {
+            firsOperand = Double.parseDouble(operand.toString());
+        } else {
+            secondOperand = Double.parseDouble(operand.toString());
+        }
+
+//        if (expression.length() > 0) {
+//            //expression.append(System.lineSeparator());
+//        }
+//        expression.append(operand.toString());
     }
 
     public void arithmeticalOperatorOnClick(int id) {
+        if (firsOperand == Double.MIN_VALUE) {
+            return;
+        }
 
+        operator = arithmeticalOperatorsId.get(id);
+
+        expression.append(System.lineSeparator());
+        expression.append(operator);
+        expression.append(System.lineSeparator());
+
+        operand.setLength(0);
+    }
+
+    public String getExpression() {
+        return expression.toString();
+    }
+
+    public void dropExpression() {
+        this.firsOperand = Double.MIN_VALUE;
+        this.secondOperand = Double.MIN_VALUE;
+        this.result = Double.MIN_VALUE;
+        this.operator = "";
+        this.lastAction = "";
+        this.operand.setLength(0);
+        this.expression.setLength(0);
     }
 
     /////////////////////////////////////////////
