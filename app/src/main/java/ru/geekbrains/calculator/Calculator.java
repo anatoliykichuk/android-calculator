@@ -124,7 +124,7 @@ public class Calculator {
             result = firsOperand + secondOperand;
 
         } else if (operator == R.id.operator_percent) {
-            //result = firsOperand + secondOperand; // TODO
+            result = secondOperand * 100 / firsOperand;
 
         }
     }
