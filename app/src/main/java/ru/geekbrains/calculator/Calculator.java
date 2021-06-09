@@ -2,6 +2,13 @@ package ru.geekbrains.calculator;
 
 import java.util.Map;
 
+// TODO: технический долг, который планирую закрыть в следующие 1-2 дня.
+// 1. Не все проверки описал - возможен рефакторинг.
+// 2. Не реализовал сценарий нажатия на кнопку изменения знака (+/-).
+// 3. Еще не думал над тем, каким образом буду хранить введенные данные.
+// 4. Не реализован форматированный вывод значений операндов и результата.
+// 5. Не создал макет для горизонтальной ориентации экрана.
+
 public class Calculator {
     private Map<Integer, String> valuesById;
 
@@ -35,6 +42,10 @@ public class Calculator {
         }
 
         String number = valuesById.get(id);
+
+        if (id == R.id.decimal_separator && operandBuilder.indexOf(number) >= 0) {
+            return;
+        }
 
         operandBuilder.append(number);
         expressionBuilder.append(number);
