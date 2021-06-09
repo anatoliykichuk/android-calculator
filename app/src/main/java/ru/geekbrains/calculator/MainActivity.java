@@ -19,13 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Map<Integer, String> operandId = getgetOperandId_();
-
         setOnClickListeners();
     }
 
     private void setOnClickListeners() {
-        calculator = new Calculator();
+        calculator = new Calculator(getValuesById());
         scoreboard = findViewById(R.id.scoreboard);
 
         View.OnClickListener operandOnClickListener = new View.OnClickListener() {
@@ -67,12 +65,29 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.operator_drop).setOnClickListener(dropOperatorOnClickListener);
     }
 
-    private Map<Integer, String> getgetOperandId_() {
+    private Map<Integer, String> getValuesById() {
+        Map<Integer, String> valuesById = new HashMap<>();
 
-        Map<Integer, String> operandId = new HashMap<>();
-        operandId.put(R.id.number_0, ((Button)findViewById(R.id.number_0)).getText().toString());
+        valuesById.put(R.id.number_0, ((Button)findViewById(R.id.number_0)).getText().toString());
+        valuesById.put(R.id.number_1, ((Button)findViewById(R.id.number_1)).getText().toString());
+        valuesById.put(R.id.number_2, ((Button)findViewById(R.id.number_2)).getText().toString());
+        valuesById.put(R.id.number_3, ((Button)findViewById(R.id.number_3)).getText().toString());
+        valuesById.put(R.id.number_4, ((Button)findViewById(R.id.number_4)).getText().toString());
+        valuesById.put(R.id.number_5, ((Button)findViewById(R.id.number_5)).getText().toString());
+        valuesById.put(R.id.number_6, ((Button)findViewById(R.id.number_6)).getText().toString());
+        valuesById.put(R.id.number_7, ((Button)findViewById(R.id.number_7)).getText().toString());
+        valuesById.put(R.id.number_8, ((Button)findViewById(R.id.number_8)).getText().toString());
+        valuesById.put(R.id.number_9, ((Button)findViewById(R.id.number_9)).getText().toString());
+        valuesById.put(R.id.decimal_separator, ((Button)findViewById(R.id.decimal_separator)).getText().toString());
+        valuesById.put(R.id.operator_divide, ((Button)findViewById(R.id.operator_divide)).getText().toString());
+        valuesById.put(R.id.operator_multiply, ((Button)findViewById(R.id.operator_multiply)).getText().toString());
+        valuesById.put(R.id.operator_minus, ((Button)findViewById(R.id.operator_minus)).getText().toString());
+        valuesById.put(R.id.operator_plus, ((Button)findViewById(R.id.operator_plus)).getText().toString());
+        valuesById.put(R.id.operator_percent, ((Button)findViewById(R.id.operator_percent)).getText().toString());
+        valuesById.put(R.id.operator_equal, ((Button)findViewById(R.id.operator_equal)).getText().toString());
+        valuesById.put(R.id.operator_change_sign, ((Button)findViewById(R.id.operator_change_sign)).getText().toString());
 
-        return operandId;
+        return valuesById;
     }
 
     private int[] getOperandId() {
