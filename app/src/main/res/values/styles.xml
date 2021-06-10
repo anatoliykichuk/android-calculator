@@ -17,8 +17,8 @@
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_margin">@dimen/indent</item>
         <item name="android:textSize">@dimen/button_text_size</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/button_number_text</item>
+        <item name="android:backgroundTint">@color/button_background</item>
     </style>
 
     <style name="ButtonOperatorStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
@@ -26,8 +26,17 @@
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_margin">@dimen/indent</item>
         <item name="android:textSize">@dimen/button_text_size</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:backgroundTint">@color/button_operator</item>
+        <item name="android:textColor">@color/button_operator_text</item>
+        <item name="android:backgroundTint">@color/button_background</item>
+    </style>
+
+    <style name="ButtonDropOperatorStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:layout_width">@dimen/button_width</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_margin">@dimen/indent</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textColor">@color/button_operator_special_text</item>
+        <item name="android:backgroundTint">@color/button_background</item>
     </style>
 
     <style name="ButtonSpecialOperatorStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
@@ -35,7 +44,7 @@
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_margin">@dimen/indent</item>
         <item name="android:textSize">@dimen/button_text_size</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:backgroundTint">@color/button_spetial_operator</item>
+        <item name="android:textColor">@color/button_operator_special_text</item>
+        <item name="android:backgroundTint">@color/button_background</item>
     </style>
 </resources>

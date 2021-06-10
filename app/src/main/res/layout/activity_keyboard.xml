@@ -32,7 +32,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/operator_drop"
                 android:text="@string/operator_drop"
-                style="@style/ButtonSpecialOperatorStyle"/>
+                style="@style/ButtonDropOperatorStyle"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/operator_change_sign"
