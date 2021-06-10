@@ -19,8 +19,8 @@
 
             <TextView
                 android:id="@+id/scoreboard"
-                android:layout_span="4"
-                style="@style/ScoreboardStyle"/>
+                style="@style/ScoreboardStyle"
+                android:layout_span="4" />
 
         </TableRow>
 
@@ -40,8 +40,8 @@
                 style="@style/ButtonSpecialOperatorStyle"/>
 
             <Button
-                android:id="@+id/operator_divide_modulo"
-                android:text="@string/operator_divide_modulo"
+                android:id="@+id/operator_percent"
+                android:text="@string/operator_percent"
                 style="@style/ButtonSpecialOperatorStyle"/>
 
             <Button
