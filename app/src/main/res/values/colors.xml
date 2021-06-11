@@ -9,8 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="button_background">#F1F1F1</color>
-    <color name="button_number_text">#C2D6F5</color>
+    <color name="button_number_text">#98ACD7</color>
     <color name="button_operator_text">#E77984</color>
-    <color name="button_operator_special_text">#B4E9DD</color>
-
+    <color name="button_operator_special_text">#85D2C2</color>
 </resources>
