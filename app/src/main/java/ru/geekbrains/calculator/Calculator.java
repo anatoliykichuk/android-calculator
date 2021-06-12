@@ -100,8 +100,12 @@ public class Calculator {
     private void setOperator(int id) {
         if (operatorsId.indexOf(id) == -1
                 || firsOperand == Double.MIN_VALUE
-                || operatorId > Integer.MIN_VALUE) {
+                || operatorId > Integer.MIN_VALUE && result == Double.MIN_VALUE) {
             return;
+        }
+
+        if (result > Double.MIN_VALUE) {
+            shiftData();
         }
 
         operatorId = id;
@@ -190,7 +194,5 @@ public class Calculator {
 
         operatorId = Integer.MIN_VALUE;
         result = Double.MIN_VALUE;
-
-        expressionBuilder.setLength(0);
     }
 }
