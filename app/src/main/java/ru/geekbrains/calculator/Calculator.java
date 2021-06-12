@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 // TODO: технический долг, который планирую закрыть в следующие 1-2 дня.
-// 1. Не все проверки описал - возможен рефакторинг.
-// 2. Не реализовал сценарий нажатия на кнопку изменения знака (+/-).
-// 3. Еще не думал над тем, каким образом буду хранить введенные данные.
-// 4. Не реализован форматированный вывод значений операндов и результата.
-// 5. Не создал макет для горизонтальной ориентации экрана.
+// 1. Еще не думал над тем, каким образом буду хранить введенные данные.
+// 2. Не создал макет для горизонтальной ориентации экрана.
 
 public class Calculator {
     private Map<Integer, String> valuesById;
@@ -16,15 +13,15 @@ public class Calculator {
     private ArrayList<Integer> operatorsId;
 
     private double firsOperand;
-    StringBuilder firsOperandBuilder;
+    private StringBuilder firsOperandBuilder;
 
     private double secondOperand;
-    StringBuilder secondOperandBuilder;
+    private StringBuilder secondOperandBuilder;
 
     private int operatorId;
     private double result;
 
-    StringBuilder expressionBuilder;
+    private StringBuilder expressionBuilder;
 
     public Calculator(Map<Integer, String> valuesById,
                       ArrayList<Integer> operandsId,
@@ -48,32 +45,20 @@ public class Calculator {
 
     public void calculate(int id) {
         if (id == R.id.operator_drop) {
-            dropExpression();
+            dropResult();
             return;
         }
 
         setFirsOperand(id);
         setOperator(id);
         setSecondOperand(id);
+        changeSign(id);
         setResult(id);
     }
 
     public String getExpression() {
         setExpressionBuilder();
         return expressionBuilder.toString();
-    }
-
-    private void dropExpression() {
-        firsOperand = Double.MIN_VALUE;
-        firsOperandBuilder.setLength(0);
-
-        secondOperand = Double.MIN_VALUE;
-        secondOperandBuilder.setLength(0);
-
-        operatorId = Integer.MIN_VALUE;
-        result = Double.MIN_VALUE;
-
-        expressionBuilder.setLength(0);
     }
 
     private void setFirsOperand(int id) {
@@ -104,7 +89,7 @@ public class Calculator {
             return;
         }
 
-        if (result > Double.MIN_VALUE) {
+        if (result > Double.MIN_VALUE || result == 0) {
             shiftData();
         }
 
@@ -133,6 +118,23 @@ public class Calculator {
         secondOperand = Double.parseDouble(secondOperandBuilder.toString());
     }
 
+    private void changeSign(int id) {
+        if (id != R.id.operator_change_sign) {
+            return;
+        }
+
+        if (operatorId == Integer.MIN_VALUE && firsOperand > Double.MIN_VALUE) {
+            firsOperand *= -1;
+            firsOperandBuilder.setLength(0);
+            firsOperandBuilder.append(String.valueOf(firsOperand));
+
+        } else if (operatorId > Integer.MIN_VALUE && secondOperand > Double.MIN_VALUE) {
+            secondOperand *= -1;
+            secondOperandBuilder.setLength(0);
+            secondOperandBuilder.append(String.valueOf(secondOperand));
+        }
+    }
+
     private void setResult(int id) {
         if (id != R.id.operator_equal
                 || firsOperand == Double.MIN_VALUE
@@ -158,6 +160,17 @@ public class Calculator {
         }
     }
 
+    private void dropResult() {
+        firsOperand = Double.MIN_VALUE;
+        firsOperandBuilder.setLength(0);
+
+        secondOperand = Double.MIN_VALUE;
+        secondOperandBuilder.setLength(0);
+
+        operatorId = Integer.MIN_VALUE;
+        result = Double.MIN_VALUE;
+    }
+
     private void setExpressionBuilder() {
         expressionBuilder.setLength(0);
         expressionBuilder.append(firsOperandBuilder.toString());
@@ -172,7 +185,7 @@ public class Calculator {
             expressionBuilder.append(secondOperandBuilder.toString());
         }
 
-        if (result > Double.MIN_VALUE) {
+        if (result > Double.MIN_VALUE || result == 0) {
             expressionBuilder.append(System.lineSeparator());
             expressionBuilder.append(valuesById.get(R.id.operator_equal));
             expressionBuilder.append(System.lineSeparator());
