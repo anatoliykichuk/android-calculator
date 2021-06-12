@@ -77,15 +77,9 @@ public class Calculator {
     }
 
     private void setFirsOperand(int id) {
-        if (operandsId.indexOf(id) == -1) {
-            return;
-        }
-
-        if (operatorId > Integer.MIN_VALUE) {
-            return;
-        }
-
-        if (id == R.id.number_0 && firsOperand == 0) {
+        if (operandsId.indexOf(id) == -1
+                || operatorId > Integer.MIN_VALUE
+                || id == R.id.number_0 && firsOperand == 0) {
             return;
         }
 
@@ -104,15 +98,9 @@ public class Calculator {
     }
 
     private void setOperator(int id) {
-        if (operatorsId.indexOf(id) == -1) {
-            return;
-        }
-
-        if (firsOperand == Double.MIN_VALUE) {
-            return;
-        }
-
-        if (operatorId > Integer.MIN_VALUE) {
+        if (operatorsId.indexOf(id) == -1
+                || firsOperand == Double.MIN_VALUE
+                || operatorId > Integer.MIN_VALUE) {
             return;
         }
 
@@ -120,19 +108,10 @@ public class Calculator {
     }
 
     private void setSecondOperand(int id) {
-        if (operandsId.indexOf(id) == -1) {
-            return;
-        }
-
-        if (operatorId == Integer.MIN_VALUE) {
-            return;
-        }
-
-        if (result > Double.MIN_VALUE) {
-            return;
-        }
-
-        if (id == R.id.number_0 && secondOperand == 0) {
+        if (operandsId.indexOf(id) == -1
+                || operatorId == Integer.MIN_VALUE
+                || result > Double.MIN_VALUE
+                || id == R.id.number_0 && secondOperand == 0) {
             return;
         }
 
@@ -151,11 +130,8 @@ public class Calculator {
     }
 
     private void setResult(int id) {
-        if (id != R.id.operator_equal) {
-            return;
-        }
-
-        if (firsOperand == Double.MIN_VALUE
+        if (id != R.id.operator_equal
+                || firsOperand == Double.MIN_VALUE
                 || secondOperand == Double.MIN_VALUE
                 || operatorId == Integer.MIN_VALUE) {
             return;
