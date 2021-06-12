@@ -1,5 +1,7 @@
 package ru.geekbrains.calculator;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 // TODO: технический долг, который планирую закрыть в следующие 1-2 дня.
@@ -11,70 +13,156 @@ import java.util.Map;
 
 public class Calculator {
     private Map<Integer, String> valuesById;
-    private int[] operandsId;
-    private int[] operatorsId;
+    private List<int[]> operandsId;
+    private List<int[]> operatorsId;
 
     private double firsOperand;
-    private double secondOperand;
-    private double result;
-    private int operator;
+    StringBuilder firsOperandBuilder;
 
-    StringBuilder operandBuilder;
+    private double secondOperand;
+    StringBuilder secondOperandBuilder;
+
+    private int operatorId;
+    private double result;
+
     StringBuilder expressionBuilder;
 
     public Calculator(Map<Integer, String> valuesById, int[] operandsId, int[] operatorsId)  {
         this.valuesById = valuesById;
-        this.operandsId = operandsId;
-        this.operatorsId = operatorsId;
+        this.operandsId = Arrays.asList(operandsId);
+        this.operatorsId = Arrays.asList(operatorsId);
 
         this.firsOperand = Double.MIN_VALUE;
-        this.secondOperand = Double.MIN_VALUE;
-        this.result = Double.MIN_VALUE;
-        this.operator = Integer.MIN_VALUE;
+        this.firsOperandBuilder = new StringBuilder();
 
-        this.operandBuilder = new StringBuilder();
+        this.secondOperand = Double.MIN_VALUE;
+        this.secondOperandBuilder = new StringBuilder();
+
+        this.result = Double.MIN_VALUE;
+        this.operatorId = Integer.MIN_VALUE;
+
         this.expressionBuilder = new StringBuilder();
     }
 
-    public void calculate(int id) {
-        if (firsOperand == Double.MIN_VALUE
-                || secondOperand == Double.MIN_VALUE
-                || operator == Integer.MIN_VALUE) {
-
+    public void setFirsOperand(int id) {
+        if (operandsId.indexOf(id) == -1) {
             return;
         }
 
-        if (operator == R.id.operator_divide) {
+        if (operatorId > Integer.MIN_VALUE) {
+            return;
+        }
 
-            if (secondOperand != 0) {
-                result = firsOperand / secondOperand;
-            }
+        if (id == R.id.number_0 && firsOperand == 0) {
+            return;
+        }
 
-        } else if (operator == R.id.operator_multiply) {
+        String operand = valuesById.get(id);
+        firsOperandBuilder.append(operand);
+        firsOperand = Double.parseDouble(firsOperandBuilder.toString());
+    }
+
+    public void setOperator(int id) {
+        if (operatorsId.indexOf(id) == -1) {
+            return;
+        }
+
+        if (firsOperand == Double.MIN_VALUE) {
+            return;
+        }
+
+        operatorId = id;
+    }
+
+    public void setSecondOperand(int id) {
+        if (operandsId.indexOf(id) == -1) {
+            return;
+        }
+
+        if (operatorId == Integer.MIN_VALUE) {
+            return;
+        }
+
+        if (id == R.id.number_0 && secondOperand == 0) {
+            return;
+        }
+
+        String operand = valuesById.get(id);
+        secondOperandBuilder.append(operand);
+        secondOperand = Double.parseDouble(secondOperandBuilder.toString());
+    }
+
+    public void setResult() {
+        if (firsOperand == Double.MIN_VALUE
+                || secondOperand == Double.MIN_VALUE
+                || operatorId == Integer.MIN_VALUE) {
+            return;
+        }
+
+        if (operatorId == R.id.operator_divide && secondOperand != 0) {
+            result = firsOperand / secondOperand;
+
+        } else if (operatorId == R.id.operator_multiply) {
             result = firsOperand * secondOperand;
 
-        } else if (operator == R.id.operator_minus) {
+        } else if (operatorId == R.id.operator_minus) {
             result = firsOperand - secondOperand;
 
-        } else if (operator == R.id.operator_plus) {
+        } else if (operatorId == R.id.operator_plus) {
             result = firsOperand + secondOperand;
 
-        } else if (operator == R.id.operator_percent) {
+        } else if (operatorId == R.id.operator_percent) {
             result = secondOperand * 100 / firsOperand;
+        }
+    }
 
+    public void calculate(int id) {
+        if (id == R.id.operator_drop) {
+            dropExpression();
+            return;
+
+        } else if (id == R.id.operator_equal) {
+            //shiftData();
+            //return;
+        }
+
+        setFirsOperand(id);
+        setOperator(id);
+        setSecondOperand(id);
+
+        setResult();
+    }
+
+    public void setExpressionBuilder() {
+        expressionBuilder.setLength(0);
+        expressionBuilder.append(firsOperandBuilder.toString());
+
+        if (operatorId > Integer.MIN_VALUE) {
+            expressionBuilder.append(System.lineSeparator());
+            expressionBuilder.append(valuesById.get(operatorId));
+        }
+
+        if (secondOperandBuilder.length() > 0) {
+            expressionBuilder.append(System.lineSeparator());
+            expressionBuilder.append(secondOperandBuilder.toString());
         }
     }
 
     public String getExpression() {
+        setExpressionBuilder();
         return expressionBuilder.toString();
     }
 
     public void dropExpression() {
         firsOperand = Double.MIN_VALUE;
+        firsOperandBuilder.setLength(0);
+
         secondOperand = Double.MIN_VALUE;
+        secondOperandBuilder.setLength(0);
+
+        operatorId = Integer.MIN_VALUE;
         result = Double.MIN_VALUE;
-        operator = Integer.MIN_VALUE;
-        operandBuilder.setLength(0);
+
         expressionBuilder.setLength(0);
     }
 
@@ -84,12 +172,15 @@ public class Calculator {
         }
 
         firsOperand = result;
+        firsOperandBuilder.setLength(0);
+        firsOperandBuilder.append(String.valueOf(result));
+
         secondOperand = Double.MIN_VALUE;
+        secondOperandBuilder.setLength(0);
+
+        operatorId = Integer.MIN_VALUE;
         result = Double.MIN_VALUE;
 
-        operandBuilder.setLength(0);
-
         expressionBuilder.setLength(0);
-        expressionBuilder.append(String.valueOf(firsOperand));
     }
 }

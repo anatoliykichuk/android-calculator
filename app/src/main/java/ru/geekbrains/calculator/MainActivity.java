@@ -74,8 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 R.id.operator_multiply,
                 R.id.operator_minus,
                 R.id.operator_plus,
-                R.id.operator_percent,
-                R.id.operator_equal
+                R.id.operator_percent
         };
     }
 }
