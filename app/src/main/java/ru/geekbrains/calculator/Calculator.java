@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class Calculator {
     private Map<Integer, String> valuesById;
+    private int[] operandsId;
+    private int[] operatorsId;
 
     private double firsOperand;
     private double secondOperand;
@@ -20,8 +22,10 @@ public class Calculator {
     StringBuilder operandBuilder;
     StringBuilder expressionBuilder;
 
-    public Calculator(Map<Integer, String> valuesById) {
+    public Calculator(Map<Integer, String> valuesById, int[] operandsId, int[] operatorsId)  {
         this.valuesById = valuesById;
+        this.operandsId = operandsId;
+        this.operatorsId = operatorsId;
 
         this.firsOperand = Double.MIN_VALUE;
         this.secondOperand = Double.MIN_VALUE;
@@ -32,54 +36,32 @@ public class Calculator {
         this.expressionBuilder = new StringBuilder();
     }
 
-    public void operandOnClick(int id) {
-        if (operandBuilder.length() > 9) {
+    public void calculate(int id) {
+        if (firsOperand == Double.MIN_VALUE
+                || secondOperand == Double.MIN_VALUE
+                || operator == Integer.MIN_VALUE) {
+
             return;
         }
 
-        if (operandBuilder.length() == 0 && (id == R.id.number_0 || id == R.id.decimal_separator)) {
-            return;
-        }
+        if (operator == R.id.operator_divide) {
 
-        String number = valuesById.get(id);
+            if (secondOperand != 0) {
+                result = firsOperand / secondOperand;
+            }
 
-        if (id == R.id.decimal_separator && operandBuilder.indexOf(number) >= 0) {
-            return;
-        }
+        } else if (operator == R.id.operator_multiply) {
+            result = firsOperand * secondOperand;
 
-        operandBuilder.append(number);
-        expressionBuilder.append(number);
+        } else if (operator == R.id.operator_minus) {
+            result = firsOperand - secondOperand;
 
-        if (operator == Integer.MIN_VALUE) {
-            firsOperand = Double.parseDouble(operandBuilder.toString());
-        } else {
-            secondOperand = Double.parseDouble(operandBuilder.toString());
-        }
-    }
+        } else if (operator == R.id.operator_plus) {
+            result = firsOperand + secondOperand;
 
-    public void arithmeticalOperatorOnClick(int id) {
-        if (firsOperand == Double.MIN_VALUE) {
-            return;
-        }
+        } else if (operator == R.id.operator_percent) {
+            result = secondOperand * 100 / firsOperand;
 
-        if (result > Double.MIN_VALUE && id == R.id.operator_equal) {
-            return;
-        }
-
-        if (id != R.id.operator_equal) {
-            operator = id;
-            operandBuilder.setLength(0);
-        }
-
-        shiftData();
-        calculate();
-
-        expressionBuilder.append(System.lineSeparator());
-        expressionBuilder.append(valuesById.get(id));
-        expressionBuilder.append(System.lineSeparator());
-
-        if (result > Double.MIN_VALUE) {
-            expressionBuilder.append(String.valueOf(result));
         }
     }
 
@@ -109,34 +91,5 @@ public class Calculator {
 
         expressionBuilder.setLength(0);
         expressionBuilder.append(String.valueOf(firsOperand));
-    }
-
-    private void calculate() {
-        if (firsOperand == Double.MIN_VALUE
-                || secondOperand == Double.MIN_VALUE
-                || operator == Integer.MIN_VALUE) {
-
-            return;
-        }
-
-        if (operator == R.id.operator_divide) {
-
-            if (secondOperand != 0) {
-                result = firsOperand / secondOperand;
-            }
-
-        } else if (operator == R.id.operator_multiply) {
-            result = firsOperand * secondOperand;
-
-        } else if (operator == R.id.operator_minus) {
-            result = firsOperand - secondOperand;
-
-        } else if (operator == R.id.operator_plus) {
-            result = firsOperand + secondOperand;
-
-        } else if (operator == R.id.operator_percent) {
-            result = secondOperand * 100 / firsOperand;
-
-        }
     }
 }

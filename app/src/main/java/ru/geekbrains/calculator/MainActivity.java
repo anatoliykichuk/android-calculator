@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Calculator calculator;
     private TextView scoreboard;
 
@@ -23,74 +27,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners() {
-        calculator = new Calculator(getValuesById());
+        ArrayList<View> buttons = ((TableLayout) findViewById(R.id.table)).getTouchables();
+
+        calculator = new Calculator(getValuesById(buttons), getOperandsId(), getOperatorsId());
         scoreboard = findViewById(R.id.scoreboard);
 
-        View.OnClickListener operandOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculator.operandOnClick(v.getId());
-                scoreboard.setText(calculator.getExpression());
-            }
-        };
-
-        int[] operandsId = getOperandId();
-
-        for (int index = 0; index < operandsId.length; index++) {
-            findViewById(operandsId[index]).setOnClickListener(operandOnClickListener);
+        for (View button : buttons) {
+            button.setOnClickListener(this);
         }
-
-        View.OnClickListener arithmeticalOperatorOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculator.arithmeticalOperatorOnClick(v.getId());
-                scoreboard.setText(calculator.getExpression());
-            }
-        };
-
-        int[] arithmeticalOperatorsId = getArithmeticalOperatorsId();
-
-        for (int index = 0; index < arithmeticalOperatorsId.length; index++) {
-            findViewById(arithmeticalOperatorsId[index]).setOnClickListener(arithmeticalOperatorOnClickListener);
-        }
-
-        View.OnClickListener dropOperatorOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculator.dropExpression();
-                scoreboard.setText(calculator.getExpression());
-            }
-        };
-
-        findViewById(R.id.operator_drop).setOnClickListener(dropOperatorOnClickListener);
     }
 
-    private Map<Integer, String> getValuesById() {
+    @Override
+    public void onClick(View v) {
+        calculator.calculate(v.getId());
+        scoreboard.setText(calculator.getExpression());
+    }
+
+    private Map<Integer, String> getValuesById(ArrayList<View> buttons) {
         Map<Integer, String> valuesById = new HashMap<>();
 
-        valuesById.put(R.id.number_0, ((Button)findViewById(R.id.number_0)).getText().toString());
-        valuesById.put(R.id.number_1, ((Button)findViewById(R.id.number_1)).getText().toString());
-        valuesById.put(R.id.number_2, ((Button)findViewById(R.id.number_2)).getText().toString());
-        valuesById.put(R.id.number_3, ((Button)findViewById(R.id.number_3)).getText().toString());
-        valuesById.put(R.id.number_4, ((Button)findViewById(R.id.number_4)).getText().toString());
-        valuesById.put(R.id.number_5, ((Button)findViewById(R.id.number_5)).getText().toString());
-        valuesById.put(R.id.number_6, ((Button)findViewById(R.id.number_6)).getText().toString());
-        valuesById.put(R.id.number_7, ((Button)findViewById(R.id.number_7)).getText().toString());
-        valuesById.put(R.id.number_8, ((Button)findViewById(R.id.number_8)).getText().toString());
-        valuesById.put(R.id.number_9, ((Button)findViewById(R.id.number_9)).getText().toString());
-        valuesById.put(R.id.decimal_separator, ((Button)findViewById(R.id.decimal_separator)).getText().toString());
-        valuesById.put(R.id.operator_divide, ((Button)findViewById(R.id.operator_divide)).getText().toString());
-        valuesById.put(R.id.operator_multiply, ((Button)findViewById(R.id.operator_multiply)).getText().toString());
-        valuesById.put(R.id.operator_minus, ((Button)findViewById(R.id.operator_minus)).getText().toString());
-        valuesById.put(R.id.operator_plus, ((Button)findViewById(R.id.operator_plus)).getText().toString());
-        valuesById.put(R.id.operator_percent, ((Button)findViewById(R.id.operator_percent)).getText().toString());
-        valuesById.put(R.id.operator_equal, ((Button)findViewById(R.id.operator_equal)).getText().toString());
-        valuesById.put(R.id.operator_change_sign, ((Button)findViewById(R.id.operator_change_sign)).getText().toString());
-
+        for (View button : buttons) {
+               valuesById.put(button.getId(), ((MaterialButton) button).getText().toString());
+        }
         return valuesById;
     }
 
-    private int[] getOperandId() {
+    private int[] getOperandsId() {
         return new int [] {
                 R.id.number_0,
                 R.id.number_1,
@@ -106,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    private int[] getArithmeticalOperatorsId() {
+    private int[] getOperatorsId() {
         return new int [] {
                 R.id.operator_divide,
                 R.id.operator_multiply,

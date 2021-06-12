@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <TableLayout
+        android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -26,9 +27,7 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            style="@style/TableRowStyle">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/operator_drop"
@@ -53,9 +52,7 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            style="@style/TableRowStyle">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/number_1"
@@ -81,9 +78,7 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            style="@style/TableRowStyle">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/number_4"
@@ -108,9 +103,7 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            style="@style/TableRowStyle">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/number_7"
@@ -135,9 +128,7 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            style="@style/TableRowStyle">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/number_0"

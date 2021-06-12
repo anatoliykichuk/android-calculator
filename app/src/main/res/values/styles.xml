@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="TableRowStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="ScoreboardStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">250dp</item>
