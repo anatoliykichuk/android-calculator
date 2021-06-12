@@ -52,29 +52,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return valuesById;
     }
 
-    private int[] getOperandsId() {
-        return new int [] {
-                R.id.number_0,
-                R.id.number_1,
-                R.id.number_2,
-                R.id.number_3,
-                R.id.number_4,
-                R.id.number_5,
-                R.id.number_6,
-                R.id.number_7,
-                R.id.number_8,
-                R.id.number_9,
-                R.id.decimal_separator,
-        };
+    private ArrayList<Integer> getOperandsId() {
+        ArrayList<Integer> operandsId = new ArrayList<>();
+        operandsId.add(R.id.number_0);
+        operandsId.add(R.id.number_1);
+        operandsId.add(R.id.number_2);
+        operandsId.add(R.id.number_3);
+        operandsId.add(R.id.number_4);
+        operandsId.add(R.id.number_5);
+        operandsId.add(R.id.number_6);
+        operandsId.add(R.id.number_7);
+        operandsId.add(R.id.number_8);
+        operandsId.add(R.id.number_9);
+        operandsId.add(R.id.decimal_separator);
+
+        return operandsId;
     }
 
-    private int[] getOperatorsId() {
-        return new int [] {
-                R.id.operator_divide,
-                R.id.operator_multiply,
-                R.id.operator_minus,
-                R.id.operator_plus,
-                R.id.operator_percent
-        };
+    private ArrayList<Integer> getOperatorsId() {
+        ArrayList<Integer> operatorsId = new ArrayList<>();
+        operatorsId.add(R.id.operator_divide);
+        operatorsId.add(R.id.operator_multiply);
+        operatorsId.add(R.id.operator_minus);
+        operatorsId.add(R.id.operator_plus);
+        operatorsId.add(R.id.operator_percent);
+
+        return operatorsId;
     }
 }

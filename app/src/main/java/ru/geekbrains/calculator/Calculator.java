@@ -1,7 +1,6 @@
 package ru.geekbrains.calculator;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 // TODO: технический долг, который планирую закрыть в следующие 1-2 дня.
@@ -13,8 +12,8 @@ import java.util.Map;
 
 public class Calculator {
     private Map<Integer, String> valuesById;
-    private List<int[]> operandsId;
-    private List<int[]> operatorsId;
+    private ArrayList<Integer> operandsId;
+    private ArrayList<Integer> operatorsId;
 
     private double firsOperand;
     StringBuilder firsOperandBuilder;
@@ -27,10 +26,13 @@ public class Calculator {
 
     StringBuilder expressionBuilder;
 
-    public Calculator(Map<Integer, String> valuesById, int[] operandsId, int[] operatorsId)  {
+    public Calculator(Map<Integer, String> valuesById,
+                      ArrayList<Integer> operandsId,
+                      ArrayList<Integer> operatorsId)  {
+
         this.valuesById = valuesById;
-        this.operandsId = Arrays.asList(operandsId);
-        this.operatorsId = Arrays.asList(operatorsId);
+        this.operandsId = operandsId;
+        this.operatorsId = operatorsId;
 
         this.firsOperand = Double.MIN_VALUE;
         this.firsOperandBuilder = new StringBuilder();
@@ -44,7 +46,37 @@ public class Calculator {
         this.expressionBuilder = new StringBuilder();
     }
 
-    public void setFirsOperand(int id) {
+    public void calculate(int id) {
+        if (id == R.id.operator_drop) {
+            dropExpression();
+            return;
+        }
+
+        setFirsOperand(id);
+        setOperator(id);
+        setSecondOperand(id);
+        setResult(id);
+    }
+
+    public String getExpression() {
+        setExpressionBuilder();
+        return expressionBuilder.toString();
+    }
+
+    private void dropExpression() {
+        firsOperand = Double.MIN_VALUE;
+        firsOperandBuilder.setLength(0);
+
+        secondOperand = Double.MIN_VALUE;
+        secondOperandBuilder.setLength(0);
+
+        operatorId = Integer.MIN_VALUE;
+        result = Double.MIN_VALUE;
+
+        expressionBuilder.setLength(0);
+    }
+
+    private void setFirsOperand(int id) {
         if (operandsId.indexOf(id) == -1) {
             return;
         }
@@ -58,11 +90,20 @@ public class Calculator {
         }
 
         String operand = valuesById.get(id);
+
+        if (id == R.id.decimal_separator && firsOperandBuilder.indexOf(operand) != -1) {
+            return;
+        }
+
+        if (id == R.id.decimal_separator && firsOperand == Double.MIN_VALUE) {
+            firsOperandBuilder.append(valuesById.get(R.id.number_0));
+        }
+
         firsOperandBuilder.append(operand);
         firsOperand = Double.parseDouble(firsOperandBuilder.toString());
     }
 
-    public void setOperator(int id) {
+    private void setOperator(int id) {
         if (operatorsId.indexOf(id) == -1) {
             return;
         }
@@ -71,10 +112,14 @@ public class Calculator {
             return;
         }
 
+        if (operatorId > Integer.MIN_VALUE) {
+            return;
+        }
+
         operatorId = id;
     }
 
-    public void setSecondOperand(int id) {
+    private void setSecondOperand(int id) {
         if (operandsId.indexOf(id) == -1) {
             return;
         }
@@ -83,16 +128,33 @@ public class Calculator {
             return;
         }
 
+        if (result > Double.MIN_VALUE) {
+            return;
+        }
+
         if (id == R.id.number_0 && secondOperand == 0) {
             return;
         }
 
         String operand = valuesById.get(id);
+
+        if (id == R.id.decimal_separator && secondOperandBuilder.indexOf(operand) != -1) {
+            return;
+        }
+
+        if (id == R.id.decimal_separator && secondOperand == Double.MIN_VALUE) {
+            secondOperandBuilder.append(valuesById.get(R.id.number_0));
+        }
+
         secondOperandBuilder.append(operand);
         secondOperand = Double.parseDouble(secondOperandBuilder.toString());
     }
 
-    public void setResult() {
+    private void setResult(int id) {
+        if (id != R.id.operator_equal) {
+            return;
+        }
+
         if (firsOperand == Double.MIN_VALUE
                 || secondOperand == Double.MIN_VALUE
                 || operatorId == Integer.MIN_VALUE) {
@@ -116,24 +178,7 @@ public class Calculator {
         }
     }
 
-    public void calculate(int id) {
-        if (id == R.id.operator_drop) {
-            dropExpression();
-            return;
-
-        } else if (id == R.id.operator_equal) {
-            //shiftData();
-            //return;
-        }
-
-        setFirsOperand(id);
-        setOperator(id);
-        setSecondOperand(id);
-
-        setResult();
-    }
-
-    public void setExpressionBuilder() {
+    private void setExpressionBuilder() {
         expressionBuilder.setLength(0);
         expressionBuilder.append(firsOperandBuilder.toString());
 
@@ -146,24 +191,13 @@ public class Calculator {
             expressionBuilder.append(System.lineSeparator());
             expressionBuilder.append(secondOperandBuilder.toString());
         }
-    }
 
-    public String getExpression() {
-        setExpressionBuilder();
-        return expressionBuilder.toString();
-    }
-
-    public void dropExpression() {
-        firsOperand = Double.MIN_VALUE;
-        firsOperandBuilder.setLength(0);
-
-        secondOperand = Double.MIN_VALUE;
-        secondOperandBuilder.setLength(0);
-
-        operatorId = Integer.MIN_VALUE;
-        result = Double.MIN_VALUE;
-
-        expressionBuilder.setLength(0);
+        if (result > Double.MIN_VALUE) {
+            expressionBuilder.append(System.lineSeparator());
+            expressionBuilder.append(valuesById.get(R.id.operator_equal));
+            expressionBuilder.append(System.lineSeparator());
+            expressionBuilder.append(String.valueOf(result));
+        }
     }
 
     private void shiftData() {
