@@ -171,6 +171,22 @@ public class Calculator {
         result = Double.MIN_VALUE;
     }
 
+    private void shiftData() {
+        if (result == Double.MIN_VALUE) {
+            return;
+        }
+
+        firsOperand = result;
+        firsOperandBuilder.setLength(0);
+        firsOperandBuilder.append(String.valueOf(result));
+
+        secondOperand = Double.MIN_VALUE;
+        secondOperandBuilder.setLength(0);
+
+        operatorId = Integer.MIN_VALUE;
+        result = Double.MIN_VALUE;
+    }
+
     private void setExpressionBuilder() {
         expressionBuilder.setLength(0);
         expressionBuilder.append(firsOperandBuilder.toString());
@@ -191,21 +207,5 @@ public class Calculator {
             expressionBuilder.append(System.lineSeparator());
             expressionBuilder.append(String.valueOf(result));
         }
-    }
-
-    private void shiftData() {
-        if (result == Double.MIN_VALUE) {
-            return;
-        }
-
-        firsOperand = result;
-        firsOperandBuilder.setLength(0);
-        firsOperandBuilder.append(String.valueOf(result));
-
-        secondOperand = Double.MIN_VALUE;
-        secondOperandBuilder.setLength(0);
-
-        operatorId = Integer.MIN_VALUE;
-        result = Double.MIN_VALUE;
     }
 }
