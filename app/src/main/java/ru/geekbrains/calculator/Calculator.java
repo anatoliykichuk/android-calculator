@@ -1,13 +1,15 @@
 package ru.geekbrains.calculator;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Map;
 
 // TODO: технический долг, который планирую закрыть в следующие 1-2 дня.
-// 1. Еще не думал над тем, каким образом буду хранить введенные данные.
-// 2. Не создал макет для горизонтальной ориентации экрана.
+// 1. Не создал макет для горизонтальной ориентации экрана.
 
-public class Calculator {
+public class Calculator implements Parcelable {
     private Map<Integer, String> valuesById;
     private ArrayList<Integer> operandsId;
     private ArrayList<Integer> operatorsId;
@@ -22,6 +24,18 @@ public class Calculator {
     private double result;
 
     private StringBuilder expressionBuilder;
+
+    public static final Creator<Calculator> CREATOR = new Creator<Calculator>() {
+        @Override
+        public Calculator createFromParcel(Parcel in) {
+            return new Calculator(in);
+        }
+
+        @Override
+        public Calculator[] newArray(int size) {
+            return new Calculator[size];
+        }
+    };
 
     public Calculator(Map<Integer, String> valuesById,
                       ArrayList<Integer> operandsId,
@@ -43,6 +57,13 @@ public class Calculator {
         this.expressionBuilder = new StringBuilder();
     }
 
+    protected Calculator(Parcel in) {
+        firsOperand = in.readDouble();
+        secondOperand = in.readDouble();
+        operatorId = in.readInt();
+        result = in.readDouble();
+    }
+
     public void calculate(int id) {
         if (id == R.id.operator_drop) {
             dropResult();
@@ -59,6 +80,19 @@ public class Calculator {
     public String getExpression() {
         setExpressionBuilder();
         return expressionBuilder.toString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(firsOperand);
+        dest.writeDouble(secondOperand);
+        dest.writeInt(operatorId);
+        dest.writeDouble(result);
     }
 
     private void setFirsOperand(int id) {
