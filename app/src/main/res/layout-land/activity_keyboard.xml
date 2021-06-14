@@ -21,8 +21,8 @@
 
             <TextView
                 android:id="@+id/scoreboard"
-                style="@style/VerticalScoreboardStyle"
-                android:layout_span="4" />
+                style="@style/HorizontalScoreboardStyle"
+                android:layout_span="5" />
 
         </TableRow>
 
@@ -49,6 +49,21 @@
                 style="@style/ButtonOperatorStyle"
                 android:text="@string/operator_divide" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/operator_multiply"
+                style="@style/ButtonOperatorStyle"
+                android:text="@string/operator_multiply" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/operator_minus"
+                style="@style/ButtonOperatorStyle"
+                android:text="@string/operator_minus" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/operator_plus"
+                style="@style/ButtonOperatorStyle"
+                android:text="@string/operator_plus" />
+
         </TableRow>
 
         <TableRow
@@ -71,16 +86,6 @@
                 android:text="@string/number_3" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/operator_multiply"
-                style="@style/ButtonOperatorStyle"
-                android:text="@string/operator_multiply" />
-
-        </TableRow>
-
-        <TableRow
-            style="@style/TableRowStyle">
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/number_4"
                 style="@style/ButtonNumberStyle"
                 android:text="@string/number_4" />
@@ -91,19 +96,20 @@
                 android:text="@string/number_5" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/number_6"
-                style="@style/ButtonNumberStyle"
-                android:text="@string/number_6" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/operator_minus"
+                android:id="@+id/operator_equal"
                 style="@style/ButtonOperatorStyle"
-                android:text="@string/operator_minus" />
+                android:layout_span="2"
+                android:text="@string/operator_equal" />
 
         </TableRow>
 
         <TableRow
             style="@style/TableRowStyle">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/number_6"
+                style="@style/ButtonNumberStyle"
+                android:text="@string/number_6" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/number_7"
@@ -121,30 +127,16 @@
                 android:text="@string/number_9" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/operator_plus"
-                style="@style/ButtonOperatorStyle"
-                android:text="@string/operator_plus" />
-
-        </TableRow>
-
-        <TableRow
-            style="@style/TableRowStyle">
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/number_0"
                 style="@style/ButtonNumberStyle"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:text="@string/number_0" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/decimal_separator"
                 style="@style/ButtonNumberStyle"
+                android:layout_span="2"
                 android:text="@string/decimal_separator" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/operator_equal"
-                style="@style/ButtonOperatorStyle"
-                android:text="@string/operator_equal" />
 
         </TableRow>
 
