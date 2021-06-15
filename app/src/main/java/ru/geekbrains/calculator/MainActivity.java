@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.settings) {
             Intent runSettings = new Intent(MainActivity.this, SettingsActivity.class);
             runSettings.putExtra(SETTINGS, settings);
-            startActivityForResult(runSettings, REQUEST_CODE_SETTINGS);
+            startActivityForResult(runSettings, SETTINGS_REQUEST_CODE);
 
         } else {
             calculator.calculate(v.getId());
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQUEST_CODE_SETTINGS) {
+        if (requestCode != SETTINGS_REQUEST_CODE) {
             super.onActivityResult(requestCode, resultCode, data);
             return;
         }
