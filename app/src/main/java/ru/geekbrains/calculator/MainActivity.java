@@ -3,6 +3,7 @@ package ru.geekbrains.calculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -15,9 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String CALCULATOR = "Calculator";
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, Keys {
     private Calculator calculator;
     private TextView scoreboard;
 
@@ -32,13 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        outState.putParcelable(CALCULATOR, calculator);
+        outState.putParcelable(Keys.CALCULATOR, calculator);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        calculator = savedInstanceState.getParcelable(CALCULATOR);
+        calculator = savedInstanceState.getParcelable(Keys.CALCULATOR);
         scoreboard.setText(calculator.getExpression());
     }
 
@@ -55,8 +54,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        calculator.calculate(v.getId());
-        scoreboard.setText(calculator.getExpression());
+        if (v.getId() == R.id.settings) {
+            Intent runSettings = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(runSettings);
+
+        } else {
+            calculator.calculate(v.getId());
+            scoreboard.setText(calculator.getExpression());
+        }
     }
 
     private Map<Integer, String> getValuesById(ArrayList<View> buttons) {

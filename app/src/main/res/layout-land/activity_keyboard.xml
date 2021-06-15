@@ -135,8 +135,12 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/decimal_separator"
                 style="@style/ButtonNumberStyle"
-                android:layout_span="2"
                 android:text="@string/decimal_separator" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/settings"
+                style="@style/ButtonSpecialOperatorStyle"
+                android:text="@string/settings" />
 
         </TableRow>
 

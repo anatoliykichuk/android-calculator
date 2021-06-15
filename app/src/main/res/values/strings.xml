@@ -19,4 +19,8 @@
     <string name="operator_drop">C</string>
     <string name="operator_percent">%</string>
     <string name="operator_change_sign">±</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="settings">⚙</string>
+    <string name="set_settings">Применить</string>
 </resources>
