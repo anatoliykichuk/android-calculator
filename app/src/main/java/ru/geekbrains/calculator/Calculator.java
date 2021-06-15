@@ -6,9 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Map;
 
-// TODO: технический долг, который планирую закрыть в следующие 1-2 дня.
-// 1. Не создал макет для горизонтальной ориентации экрана.
-
 public class Calculator implements Parcelable {
     private Map<Integer, String> valuesById;
     private ArrayList<Integer> operandsId;
