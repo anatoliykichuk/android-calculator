@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="scoreboard_height">250dp</dimen>
+    <dimen name="vertical_scoreboard_height">250dp</dimen>
+    <dimen name="horizontal_scoreboard_height">100dp</dimen>
     <dimen name="scoreboard_text_size">40sp</dimen>
     <dimen name="scoreboard_padding_right">20sp</dimen>
     <dimen name="scoreboard_padding_left">20sp</dimen>
