@@ -17,8 +17,9 @@ public class SettingsActivity extends AppCompatActivity implements Keys {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        settings = getIntent().getExtras().getParcelable(SETTINGS);
-        themeSwitcher.setChecked(settings.getDarkThemeOn());
+        ToggleButton themeSwitcher = findViewById(R.id.theme_switcher);
+
+        initializeSettings();
 
         themeSwitcher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,8 +40,12 @@ public class SettingsActivity extends AppCompatActivity implements Keys {
         });
     }
 
+    private void initializeSettings() {
+        settings = getIntent().getExtras().getParcelable(SETTINGS);
+        themeSwitcher.setChecked(settings.getDarkThemeOn());
+    }
+
     private void setSettings() {
-        ToggleButton themeSwitcher = findViewById(R.id.theme_switcher);
         settings.setDarkThemeOn(themeSwitcher.isChecked());
     }
 }
