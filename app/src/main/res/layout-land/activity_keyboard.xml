@@ -22,7 +22,7 @@
             <TextView
                 android:id="@+id/scoreboard"
                 style="@style/HorizontalScoreboardStyle"
-                android:layout_span="5" />
+                android:layout_span="7" />
 
         </TableRow>
 
