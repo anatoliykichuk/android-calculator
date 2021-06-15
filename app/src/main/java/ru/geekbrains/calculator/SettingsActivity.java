@@ -2,26 +2,28 @@ package ru.geekbrains.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
-public class SettingsActivity extends AppCompatActivity {
-    private Boolean darkThemeOn;
+public class SettingsActivity extends AppCompatActivity implements Keys {
+    private Settings settings;
+    private ToggleButton themeSwitcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        darkThemeOn = false;
+        settings = getIntent().getExtras().getParcelable(SETTINGS);
+        themeSwitcher.setChecked(settings.getDarkThemeOn());
 
-        ToggleButton themeSwitcher = findViewById(R.id.theme_switcher);
         themeSwitcher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                darkThemeOn = !darkThemeOn;
+                setSettings();
             }
         });
 
@@ -29,8 +31,16 @@ public class SettingsActivity extends AppCompatActivity {
         setSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent setSettings = new Intent();
+                setSettings.putExtra(SETTINGS, settings);
+                setResult(RESULT_OK, setSettings);
                 finish();
             }
         });
+    }
+
+    private void setSettings() {
+        ToggleButton themeSwitcher = findViewById(R.id.theme_switcher);
+        settings.setDarkThemeOn(themeSwitcher.isChecked());
     }
 }

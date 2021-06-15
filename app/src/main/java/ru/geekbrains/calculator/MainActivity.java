@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Keys {
+    private Settings settings;
     private Calculator calculator;
     private TextView scoreboard;
 
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        settings = new Settings();
 
         setOnClickListeners();
     }
@@ -56,11 +59,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.settings) {
             Intent runSettings = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(runSettings);
+            runSettings.putExtra(SETTINGS, settings);
+            startActivityForResult(runSettings, REQUEST_CODE_SETTINGS);
 
         } else {
             calculator.calculate(v.getId());
             scoreboard.setText(calculator.getExpression());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != REQUEST_CODE_SETTINGS) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+
+        if (resultCode == RESULT_OK) {
+            settings = data.getParcelableExtra(SETTINGS);
+            updateSettings();
         }
     }
 
@@ -99,5 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         operatorsId.add(R.id.operator_percent);
 
         return operatorsId;
+    }
+
+    private void updateSettings() {
+        // TODO
     }
 }
