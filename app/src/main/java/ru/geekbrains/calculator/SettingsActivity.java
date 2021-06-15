@@ -17,7 +17,7 @@ public class SettingsActivity extends AppCompatActivity implements Keys {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        ToggleButton themeSwitcher = findViewById(R.id.theme_switcher);
+        themeSwitcher = findViewById(R.id.theme_switcher);
 
         initializeSettings();
 
