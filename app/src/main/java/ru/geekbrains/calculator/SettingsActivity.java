@@ -6,25 +6,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ToggleButton;
+
+import com.google.android.material.radiobutton.MaterialRadioButton;
 
 public class SettingsActivity extends AppCompatActivity implements Keys {
     private Settings settings;
-    private ToggleButton themeSwitcher;
+    private MaterialRadioButton themeLight;
+    private MaterialRadioButton themeDark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        themeSwitcher = findViewById(R.id.theme_switcher);
+        settings = getIntent().getExtras().getParcelable(SETTINGS);
+
+        themeLight = findViewById(R.id.theme_light);
+        themeDark = findViewById(R.id.theme_dark);
 
         initializeSettings();
 
-        themeSwitcher.setOnClickListener(new View.OnClickListener() {
+        themeLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setSettings();
+                setSettings(v.getId());
+            }
+        });
+
+        themeDark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSettings(v.getId());
             }
         });
 
@@ -41,11 +53,11 @@ public class SettingsActivity extends AppCompatActivity implements Keys {
     }
 
     private void initializeSettings() {
-        settings = getIntent().getExtras().getParcelable(SETTINGS);
-        themeSwitcher.setChecked(settings.getDarkThemeOn());
+        themeLight.setChecked(!settings.getDarkThemeOn());
+        themeDark.setChecked(settings.getDarkThemeOn());
     }
 
-    private void setSettings() {
-        settings.setDarkThemeOn(themeSwitcher.isChecked());
+    private void setSettings(int id) {
+        settings.setDarkThemeOn(id == R.id.theme_dark);
     }
 }

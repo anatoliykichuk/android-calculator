@@ -14,4 +14,6 @@
     <dimen name="button_margin_top">0dp</dimen>
     <dimen name="button_margin_bottom">0dp</dimen>
     <dimen name="button_corner_radius">15dp</dimen>
+
+    <dimen name="other_button_text_size">20sp</dimen>
 </resources>
