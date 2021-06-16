@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -24,10 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(getThemeId());
         setContentView(R.layout.activity_main);
 
         settings = new Settings();
-
         setOnClickListeners();
     }
 
@@ -119,6 +120,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateSettings() {
-        // TODO
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_ID, MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(THEME_USED, getThemeId());
+        editor.apply();
+    }
+
+    private int getThemeId() {
+        if (settings == null || !settings.getDarkThemeOn()) {
+            return R.style.Theme_Calculator;
+        }
+        return R.style.Theme_CalculatorDark;
     }
 }
