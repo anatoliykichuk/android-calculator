@@ -15,7 +15,6 @@
     </style>
 
     <style name="Theme.CalculatorDark" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!--item name="android:textSize">@dimen/textSize</item-->
         <item name="android:textStyle">bold</item>
     </style>
 
