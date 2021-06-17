@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(getThemeId());
-        setContentView(R.layout.activity_main);
 
         settings = new Settings();
+        setTheme(getThemeIdFromStorage());
+
+        setContentView(R.layout.activity_main);
+
         setOnClickListeners();
     }
 
@@ -120,14 +122,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateSettings() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_ID, MODE_PRIVATE);
+        int themeId = getThemeIdFromSettings();
+        saveSettings(themeId);
 
+        //setTheme(themeId);
+        recreate();
+    }
+
+    private void saveSettings(int themeId) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(THEME_USED, getThemeId());
+        editor.putInt(THEME_USED, themeId);
         editor.apply();
     }
 
-    private int getThemeId() {
+    private int getThemeIdFromStorage(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        int themeId = sharedPreferences.getInt(THEME_USED, R.style.Theme_Calculator);
+
+        settings.setDarkThemeOn(themeId == R.style.Theme_CalculatorDark);
+
+        return themeId;
+    }
+
+    private int getThemeIdFromSettings() {
         if (settings == null || !settings.getDarkThemeOn()) {
             return R.style.Theme_Calculator;
         }

@@ -4,6 +4,6 @@ public interface Keys {
     String CALCULATOR = "Calculator";
     String SETTINGS = "Settings";
     String THEME_USED = "Theme";
-    String SHARED_PREFERENCE_ID = "Login";
+    String SHARED_PREFERENCES = "Preferences";
     int SETTINGS_REQUEST_CODE = 1;
 }
