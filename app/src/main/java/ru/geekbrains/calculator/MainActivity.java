@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Calculator calculator;
     private TextView scoreboard;
 
+    private static final int CALCULATOR_THEME_CODE = 0;
+    private static final int CALCULATOR_DARK_THEME_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         calculator = savedInstanceState.getParcelable(Keys.CALCULATOR);
-        scoreboard.setText(calculator.getExpression());
+
+        if (calculator != null) {
+            scoreboard.setText(calculator.getExpression());
+        }
     }
 
     private void setOnClickListeners() {
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (resultCode == RESULT_OK) {
             settings = data.getParcelableExtra(SETTINGS);
             updateSettings();
+            recreate();
         }
     }
 
@@ -122,33 +129,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateSettings() {
-        int themeId = getThemeIdFromSettings();
-        saveSettings(themeId);
-
-        //setTheme(themeId);
-        recreate();
-    }
-
-    private void saveSettings(int themeId) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(THEME_USED, themeId);
+        editor.putInt(THEME_USED, getThemeCodeById());
         editor.apply();
     }
 
     private int getThemeIdFromStorage(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-        int themeId = sharedPreferences.getInt(THEME_USED, R.style.Theme_Calculator);
+
+        int themeCode = sharedPreferences.getInt(THEME_USED, CALCULATOR_THEME_CODE);
+        int themeId = getThemeIdByCode(themeCode);
 
         settings.setDarkThemeOn(themeId == R.style.Theme_CalculatorDark);
 
         return themeId;
     }
 
-    private int getThemeIdFromSettings() {
-        if (settings == null || !settings.getDarkThemeOn()) {
-            return R.style.Theme_Calculator;
+    private int getThemeIdByCode(int themeCode) {
+        if (themeCode == CALCULATOR_DARK_THEME_CODE) {
+            return R.style.Theme_CalculatorDark;
         }
-        return R.style.Theme_CalculatorDark;
+        return R.style.Theme_Calculator;
+    }
+
+    private int getThemeCodeById() {
+        if (settings == null || !settings.getDarkThemeOn()) {
+            return CALCULATOR_THEME_CODE;
+        }
+        return CALCULATOR_DARK_THEME_CODE;
     }
 }
