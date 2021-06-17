@@ -62,6 +62,10 @@ public class Calculator implements Parcelable {
     }
 
     public void calculate(int id) {
+        if (id == R.id.settings) {
+            return;
+        }
+
         if (id == R.id.operator_drop) {
             dropResult();
             return;

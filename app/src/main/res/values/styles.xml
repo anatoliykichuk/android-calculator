@@ -60,4 +60,13 @@
         <item name="android:textColor">@color/button_operator_special_text</item>
         <item name="android:backgroundTint">@color/button_background</item>
     </style>
+
+    <style name="OtherButton" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:textSize">@dimen/other_button_text_size</item>
+        <item name="android:textColor">@color/button_operator_text</item>
+        <item name="android:backgroundTint">@color/button_background</item>
+    </style>
 </resources>
